@@ -12,10 +12,10 @@ export function App() {
   const [preselectedServiceId, setPreselectedServiceId] = useState<string | undefined>(undefined);
   const [preselectedProfId, setPreselectedProfId] = useState<string | undefined>(undefined);
 
-  // Estados dos dados
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [professionals, setProfessionals] = useState<Professional[]>([]);
-  const [services, setServices] = useState<DentalService[]>([]);
+  // Estados dos dados inicializados imediatamente (evita undefined no primeiro frame)
+  const [appointments, setAppointments] = useState<Appointment[]>(() => ClinicStore.getAppointments());
+  const [professionals, setProfessionals] = useState<Professional[]>(() => ClinicStore.getProfessionals());
+  const [services, setServices] = useState<DentalService[]>(() => ClinicStore.getServices());
 
   // Carregar dados da Store
   const loadStoreData = () => {

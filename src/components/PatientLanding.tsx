@@ -4,6 +4,7 @@ import {
   Award, Star, ArrowUpRight, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { DentalService, Professional } from '../types';
+import { INITIAL_PROFESSIONALS } from '../data';
 
 interface PatientLandingProps {
   services: DentalService[];
@@ -45,7 +46,8 @@ export const PatientLanding: React.FC<PatientLandingProps> = ({
     }
   ];
 
-  const currentSpecialist = professionals[activeSpecialistIndex] || professionals[0];
+  const safeProfessionals = (professionals && professionals.length > 0) ? professionals : INITIAL_PROFESSIONALS;
+  const currentSpecialist = safeProfessionals[activeSpecialistIndex] || safeProfessionals[0] || INITIAL_PROFESSIONALS[0];
 
   return (
     <div className="bg-aura-bone text-aura-noir selection:bg-aura-amber/25 selection:text-aura-noir">
@@ -185,7 +187,7 @@ export const PatientLanding: React.FC<PatientLandingProps> = ({
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="font-mono text-xs text-aura-amber">
-                  0{activeSpecialistIndex + 1} / 0{professionals.length}
+                  0{activeSpecialistIndex + 1} / 0{safeProfessionals.length}
                 </span>
                 <span className="text-neutral-300">•</span>
                 <span className="text-xs text-aura-stone font-mono flex items-center gap-1">
@@ -222,7 +224,7 @@ export const PatientLanding: React.FC<PatientLandingProps> = ({
                 Selecione o Especialista:
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {professionals.map((prof, idx) => {
+                {safeProfessionals.map((prof, idx) => {
                   const isSelected = idx === activeSpecialistIndex;
                   return (
                     <button
