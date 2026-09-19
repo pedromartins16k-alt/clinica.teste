@@ -494,10 +494,16 @@ export const PatientLanding: React.FC<PatientLandingProps> = ({
             </div>
           </div>
 
-          {/* Logotipo Gigante Tipográfico como Encerramento Editorial */}
-          <div className="pt-12 pb-8 flex flex-col sm:flex-row items-baseline justify-between text-neutral-600 text-[11px]">
+          {/* Logotipo Monumental Tipográfico AURA no Encerramento Editorial */}
+          <div className="pt-16 pb-8 border-b border-neutral-900 select-none overflow-hidden text-center sm:text-left">
+            <span className="font-serif text-[clamp(4.5rem,14vw,11.5rem)] leading-none tracking-tight text-neutral-800/50 block font-normal hover:text-neutral-700/60 transition-colors">
+              AURA
+            </span>
+          </div>
+
+          <div className="pt-8 pb-4 flex flex-col sm:flex-row items-baseline justify-between text-neutral-500 text-[11px]">
             <span>© 2026 AURA Dental Studio. Todos os direitos reservados.</span>
-            <span className="mt-2 sm:mt-0 font-mono text-[10px] tracking-widest uppercase">
+            <span className="mt-2 sm:mt-0 font-mono text-[10px] tracking-[0.2em] uppercase text-neutral-600">
               Contemporary Editorial Experience
             </span>
           </div>
