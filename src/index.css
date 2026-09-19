@@ -1,8 +1,15 @@
-/* Design System Tokens & Base Styles */
+/* Design System Tokens & Editorial Styles (latelierdev-inspired) */
 :root {
   --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  
+  --color-bone: #F9F8F6;
+  --color-surface: #F2EFEB;
+  --color-noir: #111215;
+  --color-stone: #8E8B85;
+  --color-border: #E5E1D8;
+  --color-amber: #BFA07A;
 }
 
 * {
@@ -11,38 +18,76 @@
 
 html {
   scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #FBFBFA;
-  color: #0C0D0E;
+  background-color: var(--color-bone);
+  color: var(--color-noir);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* Hairlines sutis no estilo editorial */
 .border-hairline {
   border-width: 1px;
-  border-color: #E8E6E0;
+  border-color: #E5E1D8;
 }
 
-/* Custom scrollbar discreta */
+/* Tipografia Responsiva Fluida via clamp */
+.fluid-hero-title {
+  font-size: clamp(2.5rem, 6.5vw + 1rem, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.fluid-section-title {
+  font-size: clamp(2rem, 4.5vw + 0.5rem, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+/* Imagens com estética editorial de galeria de arquitetura */
+.editorial-img {
+  filter: grayscale(20%) contrast(105%) brightness(98%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+}
+
+.group:hover .editorial-img {
+  filter: grayscale(0%) contrast(108%) brightness(100%);
+  transform: scale(1.03);
+}
+
+/* Transições elegantes */
+.transition-editorial {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Scrollbar discreta em tom de pedra quente */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F4F3EF;
+  background: #F2EFEB;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D5D1C8;
-  border-radius: 3px;
+  background: #D8D4CA;
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #B5B0A4;
+  background: #BFA07A;
+}
+
+/* Focus acessível discreto */
+:focus-visible {
+  outline: 1.5px solid #111215;
+  outline-offset: 2px;
 }

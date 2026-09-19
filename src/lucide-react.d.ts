@@ -5,6 +5,8 @@ declare module 'lucide-react' {
   export const Calendar: any;
   export const Clock: any;
   export const ArrowRight: any;
+  export const ArrowUpRight: any;
+  export const Menu: any;
   export const X: any;
   export const Check: any;
   export const ChevronRight: any;
