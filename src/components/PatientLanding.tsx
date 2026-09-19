@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   ArrowRight, ShieldCheck, Microscope, HeartHandshake, 
-  Award, Star, ArrowUpRight, ChevronLeft, ChevronRight
+  Award, Star, ArrowUpRight, ChevronLeft, ChevronRight, Sparkles
 } from 'lucide-react';
 import { DentalService, Professional } from '../types';
 import { INITIAL_PROFESSIONALS } from '../data';
@@ -25,6 +25,9 @@ export const PatientLanding: React.FC<PatientLandingProps> = ({
   const [hoveredServiceId, setHoveredServiceId] = useState<string | null>(null);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
 
+  const safeProfessionals = (professionals && professionals.length > 0) ? professionals : INITIAL_PROFESSIONALS;
+  const currentSpecialist = safeProfessionals[activeSpecialistIndex] || safeProfessionals[0] || INITIAL_PROFESSIONALS[0];
+
   const testimonials = [
     {
       quote: "Sempre tive receio de consultórios odontológicos. Na AURA, a atmosfera arquitetônica, o silêncio e o respeito ao meu tempo transformaram o tratamento. As lentes cerâmicas ficaram indetectáveis — um trabalho de pura escultura biológica.",
@@ -46,231 +49,251 @@ export const PatientLanding: React.FC<PatientLandingProps> = ({
     }
   ];
 
-  const safeProfessionals = (professionals && professionals.length > 0) ? professionals : INITIAL_PROFESSIONALS;
-  const currentSpecialist = safeProfessionals[activeSpecialistIndex] || safeProfessionals[0] || INITIAL_PROFESSIONALS[0];
-
   return (
-    <div className="bg-aura-bone text-aura-noir selection:bg-aura-amber/25 selection:text-aura-noir">
+    <div className="bg-aura-bone text-aura-charcoal selection:bg-aura-terracotta/20 selection:text-aura-forest">
       
-      {/* 1. HERO SECTION — Composição Editorial de Campanha de Luxo */}
-      <section className="relative pt-8 pb-20 md:pt-16 md:pb-28 px-6 md:px-12 max-w-7xl mx-auto border-b border-aura-border">
+      {/* =========================================================================
+          1. HERO SECTION — Off-White Quente com Acentos Sálvia e Terracota
+          ========================================================================= */}
+      <section className="relative pt-8 pb-20 md:pt-16 md:pb-28 px-6 md:px-12 max-w-7xl mx-auto border-b border-aura-border overflow-hidden">
         
-        {/* Eyebrow & Localidades */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-8 border-b border-aura-border text-[11px] uppercase tracking-[0.25em] text-aura-stone">
-          <div className="flex items-center gap-2 mb-2 sm:mb-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-aura-amber"></span>
-            <span>Clínica de Odontologia Restauradora & Estética</span>
+        {/* Halos de Luz Sutil (Conceito AURA) */}
+        <div className="aura-halo w-96 h-96 bg-aura-amber/15 -top-20 -left-20" />
+        <div className="aura-halo w-80 h-80 bg-aura-sage/10 top-40 right-10" />
+
+        {/* Eyebrow & Metrópoles */}
+        <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-8 border-b border-aura-border text-[11px] uppercase tracking-[0.25em]">
+          <div className="flex items-center gap-2 mb-2 sm:mb-0 text-aura-forest font-semibold">
+            <span className="w-2 h-2 rounded-full bg-aura-terracotta animate-pulse"></span>
+            <span>Ateliê Odontológico & Reabilitação Oral</span>
           </div>
-          <div className="flex gap-4 font-mono text-[10px]">
+          <div className="flex gap-4 font-mono text-[10px] text-aura-stone">
             <span>São Paulo</span>
-            <span>•</span>
+            <span className="text-aura-amber">•</span>
             <span>Zurique</span>
-            <span>•</span>
+            <span className="text-aura-amber">•</span>
             <span>Lisboa</span>
           </div>
         </div>
 
-        {/* Composição Editorial: Título Imersivo + Grid Fotográfico Assimétrico */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
+        {/* Composição Editorial: Tipografia com Ritmo de Cor + Moldura Fotográfica com Halo */}
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
           
           <div className="lg:col-span-8 space-y-6">
-            <h1 className="fluid-hero-title font-serif text-aura-noir font-normal">
-              A elegância silenciosa de um <span className="italic font-normal">sorriso sob medida.</span>
+            <h1 className="fluid-hero-title font-serif text-aura-forest font-normal">
+              A elegância viva de um <span className="italic font-normal text-aura-terracotta">sorriso singular.</span>
             </h1>
 
-            <p className="text-sm sm:text-base text-neutral-600 max-w-xl font-normal leading-relaxed">
-              Aliamos diagnóstico tomográfico tridimensional, microscopia cirúrgica suíça e cerâmica biomimética para criar resultados imperceptíveis e perenes.
+            <p className="text-sm sm:text-base text-neutral-700 max-w-xl font-normal leading-relaxed">
+              Combinamos o rigor da microscopia óptica suíça com a sensibilidade da cerâmica biomimética. Uma nova assinatura estética construída em harmonia com sua anatomia facial.
             </p>
 
             <div className="flex flex-wrap gap-3 pt-2">
               <button
                 onClick={onOpenBooking}
-                className="bg-aura-noir text-white text-[11px] uppercase tracking-[0.2em] px-7 py-4 hover:bg-neutral-800 transition-all flex items-center gap-3 font-medium group shadow-sm"
+                className="bg-aura-forest text-white text-[11px] uppercase tracking-[0.2em] px-7 py-4 hover:bg-aura-terracotta transition-colors duration-300 flex items-center gap-3 font-medium group shadow-md"
               >
                 <span>Agendar Consulta Inicial</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1 text-aura-amber" />
               </button>
 
               <a
-                href="#procedimentos"
-                className="border border-aura-border hover:border-aura-noir text-aura-noir text-[11px] uppercase tracking-[0.2em] px-6 py-4 transition-colors font-medium text-center"
+                href="#especialistas"
+                className="border border-aura-forest/30 hover:border-aura-forest text-aura-forest text-[11px] uppercase tracking-[0.2em] px-6 py-4 transition-colors font-medium text-center bg-white/50"
               >
-                Ver Tratamentos
+                Conhecer Mestres
               </a>
             </div>
           </div>
 
-          {/* Fotografia Arquitetônica no Hero */}
+          {/* Fotografia Arquitetônica com Moldura e Badge Terracota */}
           <div className="lg:col-span-4 relative mt-6 lg:mt-0">
-            <div className="relative aspect-[4/5] overflow-hidden border border-aura-border bg-aura-surface group">
+            <div className="relative aspect-[4/5] overflow-hidden border-2 border-aura-surface bg-white shadow-xl group">
               <img 
                 src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=900&q=80" 
-                alt="Ambiente clínico AURA Studio"
+                alt="Ambiente acolhedor AURA Studio"
                 className="w-full h-full object-cover editorial-img"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-aura-noir/40 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="text-[9px] uppercase tracking-[0.25em] block text-neutral-300">Arquitetura de Atendimento</span>
-                <span className="font-serif text-lg text-white">Conforto Neurosensorial Exclusivo</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-aura-forestDark/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute top-4 right-4 bg-aura-terracotta text-white text-[9px] uppercase tracking-[0.2em] px-2.5 py-1 font-semibold shadow-sm">
+                Boutique Care
+              </div>
+              <div className="absolute bottom-5 left-5 right-5 text-white">
+                <span className="text-[10px] uppercase tracking-[0.25em] block text-aura-amber font-mono mb-0.5">Atmosfera Acolhedora</span>
+                <span className="font-serif text-xl text-white block">Precisão & Calor Humano</span>
               </div>
             </div>
           </div>
 
         </div>
 
-        {/* Autoridade & Números Discretos (Hairline Grid) */}
+        {/* Linha de Autoridade Cromática */}
         <div className="mt-16 pt-8 border-t border-aura-border grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-          <div>
-            <span className="font-mono text-xs text-aura-amber block mb-1">01 / HISTÓRICO</span>
-            <span className="font-serif text-3xl sm:text-4xl text-aura-noir font-normal block">14+ Anos</span>
+          <div className="p-4 bg-white/60 border border-aura-border/60">
+            <span className="font-mono text-xs text-aura-terracotta font-semibold block mb-1">01 / HISTÓRICO</span>
+            <span className="font-serif text-3xl sm:text-4xl text-aura-forest font-medium block">14+ Anos</span>
             <span className="text-[11px] text-aura-stone uppercase tracking-wider block mt-0.5">Prática Clínica Dedicada</span>
           </div>
 
-          <div>
-            <span className="font-mono text-xs text-aura-amber block mb-1">02 / CASUÍSTICA</span>
-            <span className="font-serif text-3xl sm:text-4xl text-aura-noir font-normal block">+4.200</span>
+          <div className="p-4 bg-white/60 border border-aura-border/60">
+            <span className="font-mono text-xs text-aura-terracotta font-semibold block mb-1">02 / CASUÍSTICA</span>
+            <span className="font-serif text-3xl sm:text-4xl text-aura-forest font-medium block">+4.200</span>
             <span className="text-[11px] text-aura-stone uppercase tracking-wider block mt-0.5">Reabilitações Realizadas</span>
           </div>
 
-          <div>
-            <span className="font-mono text-xs text-aura-amber block mb-1">03 / TECNOLOGIA</span>
-            <span className="font-serif text-3xl sm:text-4xl text-aura-noir font-normal block">100% 3D</span>
+          <div className="p-4 bg-white/60 border border-aura-border/60">
+            <span className="font-mono text-xs text-aura-terracotta font-semibold block mb-1">03 / TECNOLOGIA</span>
+            <span className="font-serif text-3xl sm:text-4xl text-aura-forest font-medium block">100% 3D</span>
             <span className="text-[11px] text-aura-stone uppercase tracking-wider block mt-0.5">Fluxo Totalmente Digital</span>
           </div>
 
-          <div>
-            <span className="font-mono text-xs text-aura-amber block mb-1">04 / COMPROMISSO</span>
-            <span className="font-serif text-3xl sm:text-4xl text-aura-noir font-normal block">0 min</span>
+          <div className="p-4 bg-white/60 border border-aura-border/60">
+            <span className="font-mono text-xs text-aura-terracotta font-semibold block mb-1">04 / COMPROMISSO</span>
+            <span className="font-serif text-3xl sm:text-4xl text-aura-forest font-medium block">0 min</span>
             <span className="text-[11px] text-aura-stone uppercase tracking-wider block mt-0.5">Pontualidade Absoluta</span>
           </div>
         </div>
 
       </section>
 
-      {/* 2. CORPO CLÍNICO — Layout Editorial com Número Grande & Especialista em Destaque */}
-      <section id="especialistas" className="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto border-b border-aura-border">
-        
-        <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-12 border-b border-aura-border gap-4">
-          <div>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-aura-amber font-semibold block mb-2 font-mono">
-              [ 01 // ESPECIALISTAS ]
-            </span>
-            <h2 className="fluid-section-title font-serif text-aura-noir">
-              Corpo Clínico & Titulação
-            </h2>
-          </div>
-          <p className="text-xs text-neutral-600 max-w-md leading-relaxed">
-            Cada área é liderada por mestres com pós-graduação internacional e foco exclusivo em sua respectiva subespecialidade.
-          </p>
-        </div>
-
-        {/* Composição Editorial: Navegação Horizontal de Mestres */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      {/* =========================================================================
+          2. SEÇÃO ESPECIALISTAS — GRANDE BLOCO DE COR: VERDE FLORESTA PROFUNDO (#1B2E24)
+          Contraste dramático com o Hero, tipografia clara e detalhes terracota
+          ========================================================================= */}
+      <section id="especialistas" className="py-24 md:py-32 px-6 md:px-12 bg-aura-forest text-[#F7F4EE] border-b border-aura-forestDark">
+        <div className="max-w-7xl mx-auto">
           
-          {/* Foto Principal Dominante com Aspect Ratio Refinado */}
-          <div className="lg:col-span-5">
-            <div className="relative aspect-[3/4] overflow-hidden border border-aura-border bg-aura-surface group">
-              <img 
-                src={currentSpecialist.avatar} 
-                alt={currentSpecialist.name}
-                className="w-full h-full object-cover editorial-img"
-              />
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-[10px] font-mono uppercase tracking-wider border border-aura-border text-aura-noir">
-                {currentSpecialist.cro}
-              </div>
+          <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-14 border-b border-white/15 gap-4">
+            <div>
+              <span className="text-[10px] uppercase tracking-[0.3em] text-aura-amber font-semibold block mb-2 font-mono">
+                [ CORPO CLÍNICO & TITULAÇÃO ]
+              </span>
+              <h2 className="fluid-section-title font-serif text-white">
+                Mestres de Referência Internacional
+              </h2>
             </div>
+            <p className="text-xs text-neutral-300 max-w-md leading-relaxed">
+              Formação em centros de excelência de Zurique e São Paulo. Cada profissional atua exclusivamente em sua subespecialidade.
+            </p>
           </div>
 
-          {/* Dados Detalhados & Seletor dos Especialistas */}
-          <div className="lg:col-span-7 flex flex-col justify-between h-full space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="font-mono text-xs text-aura-amber">
-                  0{activeSpecialistIndex + 1} / 0{safeProfessionals.length}
-                </span>
-                <span className="text-neutral-300">•</span>
-                <span className="text-xs text-aura-stone font-mono flex items-center gap-1">
-                  <Star className="w-3.5 h-3.5 fill-aura-amber text-aura-amber" /> {currentSpecialist.rating}
-                </span>
-              </div>
-
-              <h3 className="font-serif text-3xl sm:text-4xl text-aura-noir font-normal mb-2">
-                {currentSpecialist.name}
-              </h3>
-
-              <span className="text-xs uppercase tracking-[0.18em] text-aura-amber font-medium block mb-4">
-                {currentSpecialist.role}
+            {/* Foto Dominante com Borda Dourada Suave e Saturação Expressiva */}
+            <div className="lg:col-span-5 relative">
+              {/* Número Gigante Editorial em Baixo Contraste */}
+              <span className="absolute -top-10 -left-6 font-serif text-[7rem] md:text-[9rem] leading-none text-white/5 font-bold select-none pointer-events-none">
+                0{activeSpecialistIndex + 1}
               </span>
 
-              <p className="text-sm text-neutral-600 leading-relaxed max-w-lg mb-6 font-normal">
-                {currentSpecialist.bio}
-              </p>
-
-              <div className="flex items-center gap-4">
-                <button
-                  onClick={() => onOpenBookingWithProfessional(currentSpecialist.id)}
-                  className="bg-aura-noir text-white text-[11px] uppercase tracking-[0.2em] px-6 py-3 hover:bg-neutral-800 transition-all flex items-center gap-2 font-medium"
-                >
-                  <span>Reservar com {currentSpecialist.name.split(' ')[1]}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+              <div className="relative aspect-[3/4] overflow-hidden border border-white/20 shadow-2xl bg-aura-forestDark group">
+                <img 
+                  src={currentSpecialist.avatar} 
+                  alt={currentSpecialist.name}
+                  className="w-full h-full object-cover editorial-img"
+                />
+                <div className="absolute top-4 left-4 bg-aura-forestDark/90 backdrop-blur-sm px-3.5 py-1 text-[10px] font-mono uppercase tracking-wider border border-white/20 text-white">
+                  {currentSpecialist.cro}
+                </div>
+                <div className="absolute bottom-4 right-4 bg-aura-terracotta text-white text-[10px] font-mono px-2.5 py-1 uppercase tracking-wider font-semibold">
+                  {currentSpecialist.experienceYears} Anos Prática
+                </div>
               </div>
             </div>
 
-            {/* Linhas Seletoras de Cada Especialista */}
-            <div className="border-t border-aura-border pt-6 space-y-2">
-              <span className="text-[10px] uppercase tracking-[0.25em] text-aura-stone font-semibold block mb-3">
-                Selecione o Especialista:
-              </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {safeProfessionals.map((prof, idx) => {
-                  const isSelected = idx === activeSpecialistIndex;
-                  return (
-                    <button
-                      key={prof.id}
-                      onClick={() => setActiveSpecialistIndex(idx)}
-                      className={`text-left p-3 border transition-all text-xs flex items-center justify-between ${
-                        isSelected 
-                          ? 'border-aura-noir bg-white font-semibold' 
-                          : 'border-aura-border bg-aura-surface/40 hover:border-neutral-400 text-neutral-600'
-                      }`}
-                    >
-                      <div>
-                        <span className="font-mono text-[10px] text-aura-stone mr-2">0{idx + 1}</span>
-                        <span>{prof.name}</span>
-                      </div>
-                      <span className="text-[10px] text-aura-stone font-mono">{prof.experienceYears}a</span>
-                    </button>
-                  );
-                })}
+            {/* Informações do Especialista com Tipografia Clara e Destaques Terracota */}
+            <div className="lg:col-span-7 flex flex-col justify-between space-y-8">
+              
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="font-mono text-xs text-aura-terracotta font-semibold">
+                    0{activeSpecialistIndex + 1} / 0{safeProfessionals.length}
+                  </span>
+                  <span className="text-white/30">•</span>
+                  <span className="text-xs text-neutral-300 font-mono flex items-center gap-1">
+                    <Star className="w-3.5 h-3.5 fill-aura-amber text-aura-amber" /> {currentSpecialist.rating}
+                  </span>
+                </div>
+
+                <h3 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white font-normal mb-2">
+                  {currentSpecialist.name}
+                </h3>
+
+                <span className="text-xs uppercase tracking-[0.2em] text-aura-amber font-medium block mb-6">
+                  {currentSpecialist.role}
+                </span>
+
+                <p className="text-sm sm:text-base text-neutral-300 leading-relaxed max-w-lg mb-8 font-normal">
+                  {currentSpecialist.bio}
+                </p>
+
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => onOpenBookingWithProfessional(currentSpecialist.id)}
+                    className="bg-aura-terracotta hover:bg-aura-terracottaDark transition-colors text-white text-[11px] uppercase tracking-[0.2em] px-7 py-3.5 flex items-center gap-2.5 font-medium shadow-md"
+                  >
+                    <span>Reservar com {currentSpecialist.name.split(' ')[1]}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               </div>
+
+              {/* Botões Seletores no Bloco Escuro */}
+              <div className="border-t border-white/15 pt-6 space-y-2">
+                <span className="text-[10px] uppercase tracking-[0.25em] text-neutral-400 font-semibold block mb-3">
+                  Alternar Especialista:
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {safeProfessionals.map((prof, idx) => {
+                    const isSelected = idx === activeSpecialistIndex;
+                    return (
+                      <button
+                        key={prof.id}
+                        onClick={() => setActiveSpecialistIndex(idx)}
+                        className={`text-left p-3.5 border transition-all text-xs flex items-center justify-between ${
+                          isSelected 
+                            ? 'border-aura-terracotta bg-white/10 text-white font-semibold' 
+                            : 'border-white/15 bg-white/5 hover:border-white/40 text-neutral-300'
+                        }`}
+                      >
+                        <div>
+                          <span className="font-mono text-[10px] text-aura-amber mr-2">0{idx + 1}</span>
+                          <span>{prof.name}</span>
+                        </div>
+                        <span className="text-[10px] text-neutral-400 font-mono">{prof.specialty.split('&')[0]}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
             </div>
 
           </div>
 
         </div>
-
       </section>
 
-      {/* 3. SERVIÇOS & PROCEDIMENTOS — Layout em Lista Editorial Interativa */}
-      <section id="procedimentos" className="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto border-b border-aura-border">
+      {/* =========================================================================
+          3. TRATAMENTOS & PROCEDIMENTOS — Fundo Claro com Hover Sálvia & Terracota
+          ========================================================================= */}
+      <section id="procedimentos" className="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto border-b border-aura-border">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-12 border-b border-aura-border gap-4">
           <div>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-aura-amber font-semibold block mb-2 font-mono">
-              [ 02 // TRATAMENTOS ]
+            <span className="text-[10px] uppercase tracking-[0.3em] text-aura-terracotta font-semibold block mb-2 font-mono">
+              [ CATÁLOGO DE INTERVENÇÕES ]
             </span>
-            <h2 className="fluid-section-title font-serif text-aura-noir">
-              Menu de Intervenções
+            <h2 className="fluid-section-title font-serif text-aura-forest">
+              Tratamentos Minimamente Invasivos
             </h2>
           </div>
           <p className="text-xs text-neutral-600 max-w-md leading-relaxed">
-            Procedimentos minimamente invasivos planejados digitalmente antes de qualquer intervenção física.
+            Planejamento biomimético digital: preservação máxima da estrutura biológica com previsibilidade estética.
           </p>
         </div>
 
-        {/* Linhas Editoriais com Interação Sofisticada */}
+        {/* Linhas Editoriais Interativas com Destaque Cromático no Hover */}
         <div className="divide-y divide-aura-border border-y border-aura-border">
           {services.map((service, index) => {
             const isHovered = hoveredServiceId === service.id;
@@ -280,18 +303,22 @@ export const PatientLanding: React.FC<PatientLandingProps> = ({
                 onMouseEnter={() => setHoveredServiceId(service.id)}
                 onMouseLeave={() => setHoveredServiceId(null)}
                 className={`py-8 md:py-10 px-4 md:px-6 transition-all duration-300 flex flex-col lg:flex-row lg:items-center justify-between gap-6 group cursor-pointer ${
-                  isHovered ? 'bg-white shadow-[0_8px_30px_rgba(0,0,0,0.03)]' : 'hover:bg-aura-surface/50'
+                  isHovered ? 'bg-aura-sageLight/50 pl-8' : 'hover:bg-aura-surface/50'
                 }`}
                 onClick={() => onOpenBookingWithService(service.id)}
               >
                 {/* Índice e Categoria */}
                 <div className="flex items-baseline gap-4 lg:w-1/4">
-                  <span className="font-mono text-sm text-aura-amber">0{index + 1}</span>
+                  <span className={`font-mono text-base font-semibold transition-colors ${
+                    isHovered ? 'text-aura-terracotta' : 'text-aura-forest'
+                  }`}>
+                    0{index + 1}
+                  </span>
                   <div>
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-aura-stone block mb-1 font-medium">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-aura-stone block mb-1 font-semibold">
                       {service.category}
                     </span>
-                    <span className="text-xs font-mono text-neutral-400">
+                    <span className="text-xs font-mono text-aura-sage">
                       {service.durationMinutes} min • {service.tag}
                     </span>
                   </div>
@@ -299,7 +326,9 @@ export const PatientLanding: React.FC<PatientLandingProps> = ({
 
                 {/* Título & Descrição */}
                 <div className="lg:w-1/2 pr-4">
-                  <h3 className="font-serif text-2xl md:text-3xl text-aura-noir mb-2 group-hover:translate-x-1 transition-transform duration-300">
+                  <h3 className={`font-serif text-2xl md:text-3xl mb-2 transition-colors ${
+                    isHovered ? 'text-aura-forest font-semibold' : 'text-aura-charcoal font-normal'
+                  }`}>
                     {service.title}
                   </h3>
                   <p className="text-xs text-neutral-600 leading-relaxed line-clamp-2 font-normal">
@@ -310,11 +339,15 @@ export const PatientLanding: React.FC<PatientLandingProps> = ({
                 {/* Honorários e CTA */}
                 <div className="lg:w-1/4 flex items-center justify-between lg:justify-end gap-6 pt-2 lg:pt-0">
                   <div className="text-left lg:text-right">
-                    <span className="text-[10px] uppercase tracking-wider text-aura-stone block">Honorário</span>
-                    <span className="text-xs font-semibold text-aura-noir font-mono">{service.priceFormatted}</span>
+                    <span className="text-[10px] uppercase tracking-wider text-aura-stone block">Honorário Estimado</span>
+                    <span className="text-sm font-semibold text-aura-forest font-mono">{service.priceFormatted}</span>
                   </div>
 
-                  <div className="w-10 h-10 rounded-full border border-aura-border flex items-center justify-center group-hover:border-aura-noir group-hover:bg-aura-noir group-hover:text-white transition-all">
+                  <div className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all ${
+                    isHovered 
+                      ? 'border-aura-terracotta bg-aura-terracotta text-white shadow-md' 
+                      : 'border-aura-border bg-white text-aura-forest'
+                  }`}>
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                 </div>
@@ -325,57 +358,59 @@ export const PatientLanding: React.FC<PatientLandingProps> = ({
 
       </section>
 
-      {/* 4. FILOSOFIA & MANIFESTO ARQUITETÔNICO */}
-      <section id="filosofia" className="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto border-b border-aura-border">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      {/* =========================================================================
+          4. MANIFESTO & FILOSOFIA — Fundo Quente Texturizado com Cards Sálvia
+          ========================================================================= */}
+      <section id="filosofia" className="py-24 md:py-32 px-6 md:px-12 bg-aura-surface border-b border-aura-border">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           <div className="lg:col-span-5 space-y-6">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-aura-amber font-semibold block font-mono">
-              [ 03 // MANIFESTO ]
+            <span className="text-[10px] uppercase tracking-[0.3em] text-aura-terracotta font-semibold block font-mono">
+              [ NOSSA FILOSOFIA ]
             </span>
-            <h2 className="fluid-section-title font-serif text-aura-noir leading-tight">
-              Odontologia sem pressa. Diagnósticos sem incertezas.
+            <h2 className="fluid-section-title font-serif text-aura-forest leading-tight">
+              Odontologia sem pressa. Diagnósticos com clareza absoluta.
             </h2>
-            <div className="space-y-4 text-sm text-neutral-600 leading-relaxed font-normal">
+            <div className="space-y-4 text-sm text-neutral-700 leading-relaxed font-normal">
               <p>
-                Eliminamos o ruído, a pressa e a impessoalidade dos consultórios tradicionais. Em nosso estúdio, cada consulta tem duração estendida para garantir escuta atenta, fotografia microscópica e simulação antes de qualquer intervenção.
+                Eliminamos a impessoalidade e a pressa mecânica. Na AURA, cada consulta é planejada com janelas estendidas para fotografia microscópica, escuta clínica atenta e simulação tridimensional antes de qualquer intervenção.
               </p>
               <p>
-                Acreditamos na odontologia biomimética: intervir o mínimo possível na estrutura do dente saudável para devolver estética atemporal e função biomecânica duradoura.
+                Acreditamos na biomimética: intervir o mínimo possível na estrutura do dente saudável para devolver estética perene e oclusão funcional.
               </p>
             </div>
           </div>
 
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-8 bg-white border border-aura-border">
-              <Microscope className="w-5 h-5 text-aura-noir mb-4" />
-              <h3 className="font-serif text-xl text-aura-noir mb-2">Microscopia & Tomografia 3D</h3>
+            <div className="p-8 bg-white border border-aura-border shadow-sm hover:border-aura-sage transition-colors">
+              <Microscope className="w-6 h-6 text-aura-forest mb-4" />
+              <h3 className="font-serif text-xl text-aura-forest mb-2">Microscopia Óptica & 3D</h3>
               <p className="text-xs text-neutral-600 leading-relaxed">
-                Escaneamento intraoral sem moldagens físicas desconfortáveis e magnificação óptica para preservação máxima de esmalte.
+                Escaneamento intraoral sem moldagens físicas desconfortáveis e magnificação operatória para preservação de esmalte natural.
               </p>
             </div>
 
-            <div className="p-8 bg-white border border-aura-border">
-              <HeartHandshake className="w-5 h-5 text-aura-noir mb-4" />
-              <h3 className="font-serif text-xl text-aura-noir mb-2">Conforto Neurosensorial</h3>
+            <div className="p-8 bg-white border border-aura-border shadow-sm hover:border-aura-sage transition-colors">
+              <HeartHandshake className="w-6 h-6 text-aura-terracotta mb-4" />
+              <h3 className="font-serif text-xl text-aura-forest mb-2">Conforto Neurosensorial</h3>
               <p className="text-xs text-neutral-600 leading-relaxed">
-                Isolamento acústico arquitetônico, controle cromático suave e analgesia computadorizada para um atendimento relaxante.
+                Isolamento acústico arquitetônico, cromoterapia suave e analgesia computadorizada para uma experiência sem ansiedade.
               </p>
             </div>
 
-            <div className="p-8 bg-white border border-aura-border">
-              <ShieldCheck className="w-5 h-5 text-aura-noir mb-4" />
-              <h3 className="font-serif text-xl text-aura-noir mb-2">Materiais Nobres</h3>
+            <div className="p-8 bg-white border border-aura-border shadow-sm hover:border-aura-sage transition-colors">
+              <ShieldCheck className="w-6 h-6 text-aura-sage mb-4" />
+              <h3 className="font-serif text-xl text-aura-forest mb-2">Cerâmica Biomimética</h3>
               <p className="text-xs text-neutral-600 leading-relaxed">
-                Cerâmicas de vidro e zircônias translúcidas provenientes de centros de excelência da Suíça e Alemanha com rastreabilidade.
+                Lentes e facetas em porcelana feldspática ultrafina de manufatura artesanal, com translucidez e reflexo idênticos ao dente natural.
               </p>
             </div>
 
-            <div className="p-8 bg-white border border-aura-border">
-              <Award className="w-5 h-5 text-aura-noir mb-4" />
-              <h3 className="font-serif text-xl text-aura-noir mb-2">Pontualidade Britânica</h3>
+            <div className="p-8 bg-white border border-aura-border shadow-sm hover:border-aura-sage transition-colors">
+              <Award className="w-6 h-6 text-aura-amber mb-4" />
+              <h3 className="font-serif text-xl text-aura-forest mb-2">Pontualidade Britânica</h3>
               <p className="text-xs text-neutral-600 leading-relaxed">
-                Agenda programada com janelas de segurança entre atendimentos. Zero filas e sala de espera vazia por planejamento.
+                Agenda desenhada com rigor milimétrico. Sala de espera vazia por respeito integral à sua rotina.
               </p>
             </div>
           </div>
@@ -383,82 +418,100 @@ export const PatientLanding: React.FC<PatientLandingProps> = ({
         </div>
       </section>
 
-      {/* 5. DEPOIMENTOS EDITORIAIS — Citação em Grande Escala com Navegação */}
-      <section className="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto border-b border-aura-border bg-aura-surface/30">
-        
+      {/* =========================================================================
+          5. DEPOIMENTOS — FAIXA COLORIDA: TERRACOTA SUAVE (#FBF0EB) COM TIPOGRAFIA VIBRANTE
+          ========================================================================= */}
+      <section className="py-24 md:py-32 px-6 md:px-12 bg-aura-terracottaLight border-b border-aura-border">
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-aura-amber font-semibold block font-mono">
-            [ 04 // TESTEMUNHOS REAIS ]
+          
+          <span className="text-[10px] uppercase tracking-[0.3em] text-aura-terracotta font-semibold block font-mono">
+            [ HISTÓRIAS & VOZES REAIS ]
           </span>
 
-          <p className="font-serif text-2xl sm:text-3xl md:text-4xl text-aura-noir italic leading-relaxed">
+          <p className="font-serif text-2xl sm:text-3xl md:text-4xl text-aura-forest italic leading-relaxed font-normal">
             "{testimonials[testimonialIndex].quote}"
           </p>
 
-          <div className="pt-4 border-t border-aura-border max-w-sm mx-auto flex items-center justify-between">
+          <div className="pt-6 border-t border-aura-terracotta/20 max-w-sm mx-auto flex items-center justify-between">
             <div className="text-left">
-              <span className="font-medium text-xs text-aura-noir block">
+              <span className="font-semibold text-sm text-aura-forest block">
                 {testimonials[testimonialIndex].author}
               </span>
-              <span className="text-[11px] text-aura-stone block">
+              <span className="text-[11px] text-aura-terracotta font-medium block">
                 {testimonials[testimonialIndex].role} • {testimonials[testimonialIndex].treatment}
               </span>
             </div>
 
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-2">
               <button
                 onClick={() => setTestimonialIndex(prev => (prev === 0 ? testimonials.length - 1 : prev - 1))}
-                className="w-8 h-8 rounded-full border border-aura-border bg-white flex items-center justify-center hover:border-aura-noir transition-colors"
+                className="w-9 h-9 rounded-full border border-aura-terracotta/40 bg-white flex items-center justify-center hover:bg-aura-terracotta hover:text-white transition-colors"
                 aria-label="Depoimento anterior"
               >
-                <ChevronLeft className="w-4 h-4 text-aura-noir" />
+                <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setTestimonialIndex(prev => (prev === testimonials.length - 1 ? 0 : prev + 1))}
-                className="w-8 h-8 rounded-full border border-aura-border bg-white flex items-center justify-center hover:border-aura-noir transition-colors"
+                className="w-9 h-9 rounded-full border border-aura-terracotta/40 bg-white flex items-center justify-center hover:bg-aura-terracotta hover:text-white transition-colors"
                 aria-label="Próximo depoimento"
               >
-                <ChevronRight className="w-4 h-4 text-aura-noir" />
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* =========================================================================
+          6. CALL TO ACTION FINAL — COLOR BLOCK: VERDE FLORESTA COM DETALHES DOURADOS
+          ========================================================================= */}
+      <section className="py-24 md:py-32 px-6 md:px-12 bg-aura-forest text-white text-center relative overflow-hidden">
+        
+        {/* Halos Decorativos */}
+        <div className="aura-halo w-96 h-96 bg-aura-amber/10 top-0 left-1/2 -translate-x-1/2" />
+
+        <div className="relative z-10 max-w-4xl mx-auto space-y-6">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-aura-amber font-semibold block font-mono">
+            CONSULTAS COM HORA MARCADA
+          </span>
+
+          <h2 className="fluid-hero-title font-serif text-white font-normal leading-none">
+            O primeiro passo para o seu <span className="italic font-normal text-aura-amber">novo sorriso.</span>
+          </h2>
+
+          <p className="text-sm md:text-base text-neutral-300 max-w-xl mx-auto leading-relaxed font-normal">
+            Agende seu check-up digital com escaneamento iTero 3D e converse diretamente com nossos mestres.
+          </p>
+
+          <div className="pt-4">
+            <button
+              onClick={onOpenBooking}
+              className="bg-aura-terracotta hover:bg-aura-terracottaDark text-white text-xs uppercase tracking-[0.25em] px-10 py-5 transition-colors font-medium shadow-xl group inline-flex items-center gap-3"
+            >
+              <span>Iniciar Agendamento Online</span>
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </button>
           </div>
         </div>
 
       </section>
 
-      {/* 6. CALL TO ACTION EDITORIAL FINAL */}
-      <section className="py-24 md:py-32 px-6 md:px-12 max-w-5xl mx-auto text-center">
-        <span className="text-[10px] uppercase tracking-[0.3em] text-aura-stone font-semibold block mb-4 font-mono">
-          ATENDIMENTO COM HORA MARCADA
-        </span>
-
-        <h2 className="fluid-hero-title font-serif text-aura-noir mb-6 leading-none">
-          O primeiro passo para a sua <span className="italic font-normal">reabilitação.</span>
-        </h2>
-
-        <p className="text-sm md:text-base text-neutral-600 max-w-xl mx-auto mb-10 leading-relaxed font-normal">
-          Agende seu diagnóstico com o corpo clínico da AURA. Escolha a subespecialidade e reserve o horário diretamente no sistema.
-        </p>
-
-        <button
-          onClick={onOpenBooking}
-          className="bg-aura-noir text-white text-xs uppercase tracking-[0.25em] px-10 py-5 hover:bg-neutral-800 transition-all font-medium shadow-sm group inline-flex items-center gap-3"
-        >
-          <span>Iniciar Agendamento Online</span>
-          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-        </button>
-      </section>
-
-      {/* 7. FOOTER EDITORIAL COM ASSINATURA VISUAL 'AURA' */}
-      <footer className="bg-[#0C0D0E] text-[#F9F8F6] pt-20 pb-12 px-6 md:px-12 border-t border-neutral-900 text-xs">
+      {/* =========================================================================
+          7. FOOTER EDITORIAL COMPLETO
+          ========================================================================= */}
+      <footer className="bg-aura-noir text-[#F7F4EE] pt-20 pb-12 px-6 md:px-12 border-t border-neutral-900 text-xs">
         <div className="max-w-7xl mx-auto">
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 pb-16 border-b border-neutral-800">
             <div>
-              <span className="font-serif text-3xl text-white block mb-2 font-medium tracking-wide">AURA</span>
-              <span className="text-[10px] text-neutral-400 block mb-4 uppercase tracking-[0.25em]">Dental Studio</span>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-aura-terracotta"></span>
+                <span className="font-serif text-3xl text-white font-medium tracking-wide">AURA</span>
+              </div>
+              <span className="text-[10px] text-aura-amber block mb-4 uppercase tracking-[0.25em]">Dental Studio</span>
               <p className="text-neutral-400 leading-relaxed text-[11px] max-w-xs">
-                Centro de excelência em biomimética dental, estética restauradora e microcirurgia piezoelétrica guiada.
+                Centro de excelência em biomimética dental, cerâmicas restauradoras e microcirurgia guiada.
               </p>
             </div>
 
@@ -494,16 +547,16 @@ export const PatientLanding: React.FC<PatientLandingProps> = ({
             </div>
           </div>
 
-          {/* Logotipo Monumental Tipográfico AURA no Encerramento Editorial */}
+          {/* Logotipo Monumental Tipográfico AURA com Leve Brilho Terracota no Hover */}
           <div className="pt-16 pb-8 border-b border-neutral-900 select-none overflow-hidden text-center sm:text-left">
-            <span className="font-serif text-[clamp(4.5rem,14vw,11.5rem)] leading-none tracking-tight text-neutral-800/50 block font-normal hover:text-neutral-700/60 transition-colors">
+            <span className="font-serif text-[clamp(4.5rem,14vw,11.5rem)] leading-none tracking-tight text-neutral-800/60 block font-normal hover:text-aura-sage/30 transition-colors">
               AURA
             </span>
           </div>
 
           <div className="pt-8 pb-4 flex flex-col sm:flex-row items-baseline justify-between text-neutral-500 text-[11px]">
             <span>© 2026 AURA Dental Studio. Todos os direitos reservados.</span>
-            <span className="mt-2 sm:mt-0 font-mono text-[10px] tracking-[0.2em] uppercase text-neutral-600">
+            <span className="mt-2 sm:mt-0 font-mono text-[10px] tracking-[0.2em] uppercase text-neutral-500">
               Contemporary Editorial Experience
             </span>
           </div>
